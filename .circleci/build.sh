@@ -40,7 +40,7 @@ function compile() {
         -d chat_id="-1001599759389" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>xKernelCompiler</b>%0ABUILDER NAME : <code>${KBUILD_BUILD_USER}</code>%0ABUILDER HOST : <code>${KBUILD_BUILD_HOST}</code>%0ADEVICE DEFCONFIG : <code>${DEVICE_DEFCONFIG}</code>%0ACLANG VERSION : <code>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
+        -d text="<b>xKernelCompiler</b>%0ABUILDER NAME : <code>${arif}</code>%0ABUILDER HOST : <code>${mndr-ci}</code>%0ADEVICE DEFCONFIG : <code>${X01AD_defconfig}</code>%0ACLANG VERSION : <code>$(${clang}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0ACLANG ROOTDIR : <code>${clang}</code>%0AKERNEL ROOTDIR : <code>${X01AD}</code>"
 
   cd {X01AD}
   make -j$(nproc) O=out ARCH=arm64 {X01AD_defconfig}
