@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
-git clone --depth=1 $kernel_source $device_codename
+git clone --depth=1 https://github.com/ArifDroidDev/kernel_asus_X01AD X01AD
 git clone --depth=1 https://github.com/xyz-prjkt/xRageTC-clang clang
 
 # Main
-KERNEL_NAME=$kernel_name # IMPORTANT ! Declare your kernel name
-KERNEL_ROOTDIR=$(pwd)/$device_codename # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_CODENAME=$device_codename # IMPORTANT ! Declare your device codename
-DEVICE_DEFCONFIG=$kernel_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+KERNEL_NAME=$ExtraJoss-V3 # IMPORTANT ! Declare your kernel name
+KERNEL_ROOTDIR=$(pwd)/$X01AD # IMPORTANT ! Fill with your kernel source root directory.
+DEVICE_CODENAME=$X01AD # IMPORTANT ! Declare your device codename
+DEVICE_DEFCONFIG=$X01AD_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
-export KBUILD_BUILD_USER=xyzuan # Change with your own name or else.
-export KBUILD_BUILD_HOST=xyzscape-ci # Change with your own hostname.
-IMAGE=$(pwd)/lavender/out/arch/arm64/boot/Image.gz-dtb
+export KBUILD_BUILD_USER=arif # Change with your own name or else.
+export KBUILD_BUILD_HOST=mndr-ci # Change with your own hostname.
+IMAGE=$(pwd)/X01AD/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 PATH="${PATH}:${CLANG_ROOTDIR}/bin"
@@ -36,8 +36,8 @@ echo ================================================
 function compile() {
 
    # Your Telegram Group
-   curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" \
-        -d chat_id="$chat_id" \
+   curl -s -X POST "https://api.telegram.org/bot$2037078975:AAE7HL26qDv6rslkKaHKYDeMD9RrhqVqxEk/sendMessage" \
+        -d chat_id="$-1001599759389" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
         -d text="<b>xKernelCompiler</b>%0ABUILDER NAME : <code>${KBUILD_BUILD_USER}</code>%0ABUILDER HOST : <code>${KBUILD_BUILD_HOST}</code>%0ADEVICE DEFCONFIG : <code>${DEVICE_DEFCONFIG}</code>%0ACLANG VERSION : <code>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
@@ -53,13 +53,13 @@ function compile() {
 	finerr
 	exit 1
    fi
-    git clone --depth=1 $anykernel AnyKernel
+    git clone --depth=1 https://github.com/osm0sis/AnyKernel3 anyKernel
 	cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 }
 
 # Push
 function push() {
-    cd AnyKernel
+    cd anyKernel
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
         -F chat_id="$chat_id" \
@@ -80,7 +80,7 @@ function finerr() {
 
 # Zipping
 function zipping() {
-    cd AnyKernel || exit 1
+    cd anyKernel || exit 1
     zip -r9 ${KERNEL_NAME}-${DEVICE_CODENAME}-${DATE}.zip *
     cd ..
 }
