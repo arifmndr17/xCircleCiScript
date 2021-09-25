@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
-git clone --depth=1 https://github.com/ArifDroidDev/kernel_asus_X01AD X01AD
+git clone --depth=1 https://github.com/arifmndr17/Asus_X01AD X01AD
 git clone --depth=1 https://github.com/xyz-prjkt/xRageTC-clang clang
 
 # Main
-KERNEL_NAME=$ExtraJoss-V3 # IMPORTANT ! Declare your kernel name
+KERNEL_NAME=$ExtraJossV3 # IMPORTANT ! Declare your kernel name
 KERNEL_ROOTDIR=$(pwd)/X01AD # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
-DEVICE_DEFCONFIG=X01AD_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+DEVICE_DEFCONFIG=X01A_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=mndr-ci # Change with your own hostname.
@@ -36,7 +36,7 @@ echo ================================================
 function compile() {
 
    # Your Telegram Group
-   curl -s -X POST "https://api.telegram.org/bot$1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendMessage" \
+   curl -s -X POST "https://api.telegram.org/bot=1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendMessage" \
         -d chat_id="-1001287929514" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
@@ -61,7 +61,7 @@ function compile() {
 function push() {
     cd anyKernel
     ZIP=$(echo *.zip)
-    curl -F document=@$ZIP "https://api.telegram.org/bot$1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendDocument" \
+    curl -F document=@$ZIP "https://api.telegram.org/bot=1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendDocument" \
         -F chat_id="-1001287929514" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
@@ -70,7 +70,7 @@ function push() {
 }
 # Fin Error
 function finerr() {
-    curl -s -X POST "https://api.telegram.org/bot$1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendMessage" \
+    curl -s -X POST "https://api.telegram.org/bot=1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendMessage" \
         -d chat_id="-1001287929514" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
