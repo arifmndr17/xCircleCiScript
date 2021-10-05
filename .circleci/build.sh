@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
-git clone --depth=1 https://github.com/arifmndr17/Asus_X01AD X01AD
+git clone --depth=1 https://github.com/stormbreaker-project/kernel_asus_X01AD X01AD
 git clone --depth=1 https://github.com/xyz-prjkt/xRageTC-clang clang
 
 # Main
 KERNEL_NAME=$ExtraJossV3 # IMPORTANT ! Declare your kernel name
 KERNEL_ROOTDIR=$(pwd)/X01AD # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
-DEVICE_DEFCONFIG=X01A_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+DEVICE_DEFCONFIG=X01AD_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=mndr-ci # Change with your own hostname.
@@ -36,7 +36,7 @@ echo ================================================
 function compile() {
 
    # Your Telegram Group
-   curl -s -X POST "https://api.telegram.org/bot=1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendMessage" \
+   curl -s -X POST "https://api.telegram.org/bot=1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendMessage" \
         -d chat_id="-1001287929514" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
@@ -45,7 +45,7 @@ function compile() {
   cd ${KERNEL_ROOTDIR}
   make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
   make -j$(nproc) ARCH=arm64 O=out \
-	CC=${CLANG_ROOTDIR}/bin/clang \
+	Ld=${CLANG_ROOTDIR}/bin/clang \
 	CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
 	CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
 
@@ -61,7 +61,7 @@ function compile() {
 function push() {
     cd anyKernel
     ZIP=$(echo *.zip)
-    curl -F document=@$ZIP "https://api.telegram.org/bot=1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendDocument" \
+    curl -F document=@$ZIP "https://api.telegram.org/bot=1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendDocument" \
         -F chat_id="-1001287929514" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
@@ -70,7 +70,7 @@ function push() {
 }
 # Fin Error
 function finerr() {
-    curl -s -X POST "https://api.telegram.org/bot=1678018441:AAF5dhxlB216j3Cl4fnCZ09heng8R3Geyoc/sendMessage" \
+    curl -s -X POST "https://api.telegram.org/bot=1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendMessage" \
         -d chat_id="-1001287929514" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
@@ -81,7 +81,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd anyKernel || exit 1
-    zip -r9 ${ExtraJoss}-${X01AD}-${25}.zip *
+    zip -r9 ${ExtraJoss}-${X01AD}-${05}.zip *
     cd ..
 }
 check
