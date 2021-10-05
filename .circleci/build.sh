@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
-git clone --depth=1 https://github.com/stormbreaker-project/kernel_asus_X01AD X01AD
+git clone --depth=1 https://github.com/ArifDroidDev/Asus_X01AD X01AD
 git clone --depth=1 https://github.com/xyz-prjkt/xRageTC-clang clang
 
 # Main
@@ -8,7 +8,7 @@ KERNEL_NAME=$ExtraJossV3 # IMPORTANT ! Declare your kernel name
 KERNEL_ROOTDIR=$(pwd)/X01AD # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
 DEVICE_DEFCONFIG=X01AD_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
-CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
+CLANG_ROOTDIR=$(pwd)/proton # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=mndr-ci # Change with your own hostname.
 IMAGE=(pwd)/X01AD/out/arch/arm64/boot/Image.gz-dtb
