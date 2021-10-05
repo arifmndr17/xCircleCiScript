@@ -36,8 +36,8 @@ echo ================================================
 function compile() {
 
    # Your Telegram Group
-   curl -s -X POST "https://api.telegram.org/bot$1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendMessage" \
-        -d chat_id="-1001287929514" \
+   curl -s -X POST "https://api.telegram.org/bot=2036994033:AAFeg52VkKNknWoOsOzszGD71itmWUIOfvQ/sendMessage" \
+        -d chat_id="-1001580307414" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
         -d text="<b>xKernelCompiler</b>%0ABUILDER NAME : <code>${KBUILD_BUILD_USER}</code>%0ABUILDER HOST : <code>${KBUILD_BUILD_HOST}</code>%0ADEVICE DEFCONFIG : <code>${DEVICE_DEFCONFIG}</code>%0ACLANG VERSION : <code>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
@@ -61,8 +61,8 @@ function compile() {
 function push() {
     cd AnyKernel
     ZIP=$(echo *.zip)
-    curl -F document=@$ZIP "https://api.telegram.org/bot$1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendDocument" \
-        -F chat_id="-1001287929514" \
+    curl -F document=@$ZIP "https://api.telegram.org/bot=2036994033:AAFeg52VkKNknWoOsOzszGD71itmWUIOfvQ/sendDocument" \
+        -F chat_id="-1001580307414" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
         -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>Asus Zenfone Max M2 (X01AD)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
@@ -70,8 +70,8 @@ function push() {
 }
 # Fin Error
 function finerr() {
-    curl -s -X POST "https://api.telegram.org/bot=$1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendMessage" \
-        -d chat_id="-1001287929514" \
+    curl -s -X POST "https://api.telegram.org/bot=2036994033:AAFeg52VkKNknWoOsOzszGD71itmWUIOfvQ/sendMessage" \
+        -d chat_id="-1001580307414" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
         -d text="Build throw an error(s)"
