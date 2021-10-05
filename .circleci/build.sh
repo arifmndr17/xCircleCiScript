@@ -53,19 +53,19 @@ function compile() {
 	finerr
 	exit 1
    fi
-    git clone --depth=1 https://github.com/osm0sis/AnyKernel3 anyKernel
-	cp out/arch/arm64/boot/Image.gz-dtb anyKernel
+    git clone --depth=1 https://github.com/osm0sis/AnyKernel3 AnyKernel
+	cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 }
 
 # Push
 function push() {
-    cd anyKernel
+    cd AnyKernel
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot=1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendDocument" \
         -F chat_id="-1001287929514" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>Xiaomi Redmi Note 7 (lavender)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
+        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>Asus Zenfone Max M2 (X01AD)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
 
 }
 # Fin Error
@@ -80,7 +80,7 @@ function finerr() {
 
 # Zipping
 function zipping() {
-    cd anyKernel || exit 1
+    cd AnyKernel || exit 1
     zip -r9 ${ExtraJoss}-${X01AD}-${05}.zip *
     cd ..
 }
