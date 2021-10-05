@@ -69,7 +69,7 @@ make -j$(nproc) ARCH=arm64 O=out \
 	finerr
 	exit 1
    fi
-    git clone --depth=1 https://github.com/osm0sis/AnyKernel3 AnyKernel
+    git clone --depth=1 https://github.com/ArifDroidDev/AnyKernel3 AnyKernel
 	cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 }
 
