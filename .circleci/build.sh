@@ -11,7 +11,7 @@ DEVICE_DEFCONFIG=X01AD_defconfig # IMPORTANT ! Declare your kernel source defcon
 CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=mndr-ci # Change with your own hostname.
-IMAGE=(pwd)/X01AD/out/arch/arm64/boot/Image.gz
+IMAGE=(pwd)/X01AD/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 PATH="${PATH}:${CLANG_ROOTDIR}/bin"
@@ -53,8 +53,8 @@ function compile() {
 	finerr
 	exit 1
    fi
-    git clone --depth=1 https://github.com/osm0sis/AnyKernel3 AnyKernel
-	cp out/arch/arm64/boot/Image.gz AnyKernel
+    git clone --depth=1 https://github.com/ArifDroidDev/AnyKernel3 AnyKernel
+	cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 }
 
 # Push
