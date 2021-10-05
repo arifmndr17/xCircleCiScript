@@ -40,7 +40,7 @@ function compile() {
         -d chat_id="-1001287929514" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>xKernelCompiler</b>%0ABUILDER NAME : <code>${arif}</code>%0ABUILDER HOST : <code>${mndr-ci}</code>%0ADEVICE DEFCONFIG : <code>${X01AD_defconfig}</code>%0ACLANG VERSION : <code>$(${Proton clang version 13.0.0}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
+        -d text="<b>xKernelCompiler</b>%0ABUILDER NAME : <code>${KBUILD_BUILD_USER}</code>%0ABUILDER HOST : <code>${KBUILD_BUILD_HOST}</code>%0ADEVICE DEFCONFIG : <code>${DEVICE_DEFCONFIG}</code>%0ACLANG VERSION : <code>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0ACLANG ROOTDIR : <code>${CLANG_ROOTDIR}</code>%0AKERNEL ROOTDIR : <code>${KERNEL_ROOTDIR}</code>"
 
   cd ${KERNEL_ROOTDIR}
   make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
@@ -54,7 +54,7 @@ function compile() {
 	exit 1
    fi
     git clone --depth=1 https://github.com/osm0sis/AnyKernel3 AnyKernel
-	cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
+	cp out/arch/arm64/boot/Image.gz AnyKernel
 }
 
 # Push
