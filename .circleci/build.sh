@@ -8,7 +8,7 @@ KERNEL_NAME=$ExtraJossV3 # IMPORTANT ! Declare your kernel name
 KERNEL_ROOTDIR=$(pwd)/X01AD # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
 DEVICE_DEFCONFIG=X01A_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
-CLANG_ROOTDIR=$(pwd)/proton # IMPORTANT! Put your clang directory here.
+CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=mndr-ci # Change with your own hostname.
 IMAGE=(pwd)/X01AD/out/arch/arm64/boot/Image.gz-dtb
@@ -36,7 +36,7 @@ echo ================================================
 function compile() {
 
    # Your Telegram Group
-   curl -s -X POST "https://api.telegram.org/bot=1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendMessage" \
+   curl -s -X POST "https://api.telegram.org/bot$1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendMessage" \
         -d chat_id="-1001287929514" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
@@ -61,7 +61,7 @@ function compile() {
 function push() {
     cd AnyKernel
     ZIP=$(echo *.zip)
-    curl -F document=@$ZIP "https://api.telegram.org/bot=1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendDocument" \
+    curl -F document=@$ZIP "https://api.telegram.org/bot$1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendDocument" \
         -F chat_id="-1001287929514" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
@@ -70,7 +70,7 @@ function push() {
 }
 # Fin Error
 function finerr() {
-    curl -s -X POST "https://api.telegram.org/bot=1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendMessage" \
+    curl -s -X POST "https://api.telegram.org/bot=$1275367356:AAGy9rCe3WVf7spx64fNmslEE10tzCejrjQ/sendMessage" \
         -d chat_id="-1001287929514" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
