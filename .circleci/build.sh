@@ -2,6 +2,9 @@
 echo "Downloading few Dependecies . . ."
 git clone --depth=1 https://github.com/ArifDroidDev/kernel_asus_X01AD X01AD
 git clone --depth=1 https://github.com/xyz-prjkt/xRageTC-clang clang
+git remote add upstream https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/ && git fetch upstream v4.9.287 && git merge FETCH_HEAD
+git fetch upstream v4.9.287 && git merge FETCH_HEAD
+git merge --continue
 
 # Main Declaration
 export TG_TOKEN=2036994033:AAFeg52VkKNknWoOsOzszGD71itmWUIOfvQ
