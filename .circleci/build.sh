@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
-git clone --depth=1 https://github.com/ArifDroidDev/kernel_asus_X01AD X01AD
+git clone --depth=1 https://github.com/ArifDroidDev/Gatrix_Kernel X01AD
 git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
 
 # Main Declaration
-KERNEL_NAME=ExtraJoss_Test # IMPORTANT ! Declare your kernel name
+KERNEL_NAME=ExtraJoss-V7 # IMPORTANT ! Declare your kernel name
 KERNEL_ROOTDIR=$(pwd)/X01AD # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
 DEVICE_DEFCONFIG=X01AD_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
@@ -67,7 +67,7 @@ make -j$(nproc) ARCH=arm64 O=out \
 	finerr
 	exit 1
    fi
-    git clone --depth=1 https://github.com/arifmndr17/AnyKernel AnyKernel
+    git clone --depth=1 https://github.com/arifmndr17/AnyKernel3 AnyKernel
 	cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 }
 
