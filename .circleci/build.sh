@@ -50,7 +50,7 @@ tg_post_msg "<b>Bot Test</b>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%
 
 # Compile
 compile(){
-tg_post_msg "<b>Bot Test:</b><code>Membangun Kernel sedang di mulai, Sabar ya bro. Gak lama kok..</code>"
+tg_post_msg "<b>Bot Test:</b><code>Building Kernel sedang di mulai, harap tunggu beberapa menit..</code>"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
