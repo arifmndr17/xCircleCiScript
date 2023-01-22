@@ -4,7 +4,7 @@ git clone --depth=1 https://github.com/ArifDroidDev/Xirlect-Kernel -b master X01
 git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
 
 # Main Declaration
-KERNEL_NAME=XIRLECT⚡ # IMPORTANT ! Declare your kernel name
+KERNEL_NAME=XIRLECT # IMPORTANT ! Declare your kernel name
 KERNEL_ROOTDIR=$(pwd)/X01AD # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
 DEVICE_DEFCONFIG=X01AD_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
@@ -46,11 +46,11 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>Bot Test</b>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0AClang Version : <code>${KBUILD_COMPILER_STRING}</code>%0AClang Rootdir : <code>${CLANG_ROOTDIR}</code>%0AKernel Rootdir : <code>${KERNEL_ROOTDIR}</code>"
+tg_post_msg "<b>Bot Kernel</b>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0AClang Version : <code>${KBUILD_COMPILER_STRING}</code>%0AClang Rootdir : <code>${CLANG_ROOTDIR}</code>%0AKernel Rootdir : <code>${KERNEL_ROOTDIR}</code>"
 
 # Compile
 compile(){
-tg_post_msg "<b>Bot Test:</b><code>Building Kernel sedang di mulai, harap tunggu beberapa menit..</code>"
+tg_post_msg "<b>Bot Kernel:</b><code>Building Kernel sedang di mulai, harap tunggu beberapa menit..</code>"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
