@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
-git clone --depth=1 https://github.com/ArifDroidDev/Xirlect-Kernel -b master X01AD
+git clone --depth=1 https://github.com/ArifDroidDev/Xirlect-Kernel X01AD
 git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
 
 # Main Declaration
