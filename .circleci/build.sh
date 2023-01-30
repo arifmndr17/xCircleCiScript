@@ -5,7 +5,7 @@ git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
 
 # Main Declaration
 KERNEL_NAME=X00R-Test # IMPORTANT ! Declare your kernel name
-KERNEL_ROOTDIR=$(pwd)/X00R# IMPORTANT ! Fill with your kernel source root directory.
+KERNEL_ROOTDIR=$(pwd)/X00R # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
 DEVICE_DEFCONFIG=X00R_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
