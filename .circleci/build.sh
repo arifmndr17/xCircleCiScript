@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
-git clone --depth=1 https://github.com/ArifDroidDev/Extrajoss_kernel X01AD
+git clone --depth=1 https://github.com/arifmndr17/android_kernel_asus_X00R X00R
 git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
 
 # Main Declaration
-KERNEL_NAME=ExtraJoss-OC # IMPORTANT ! Declare your kernel name
-KERNEL_ROOTDIR=$(pwd)/X01AD # IMPORTANT ! Fill with your kernel source root directory.
+KERNEL_NAME=X00R-Test # IMPORTANT ! Declare your kernel name
+KERNEL_ROOTDIR=$(pwd)/X00R# IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
-DEVICE_DEFCONFIG=X01AD_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+DEVICE_DEFCONFIG=X00R_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=Arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=DroidDev # Change with your own hostname.
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
-IMAGE=$(pwd)/X01AD/out/arch/arm64/boot/Image.gz-dtb
+IMAGE=$(pwd)/X00R/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 
@@ -50,7 +50,7 @@ tg_post_msg "<b>Bot Kernel</b>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code
 
 # Compile
 compile(){
-tg_post_msg "<b>Bot Kernel:</b><code>Stable Extrajoss Kernel OC Release Now..</code>"
+tg_post_msg "<b>Bot Kernel:</b><code>X00R Release Now..</code>"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
