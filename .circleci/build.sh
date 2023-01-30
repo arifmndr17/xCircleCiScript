@@ -1,35 +1,52 @@
 #!/usr/bin/env bash
+#
+# Copyright (C) 2021 a arifmndr17 property
+#
+
+# Needed Secret Variable
+# KERNEL_NAME | Your kernel name
+# KERNEL_SOURCE | Your kernel link source
+# KERNEL_BRANCH  | Your needed kernel branch if needed with -b. eg -b eleven_eas
+# DEVICE_CODENAME | Your device codename
+# DEVICE_DEFCONFIG | Your device defconfig eg. lavender_defconfig
+# ANYKERNEL | Your Anykernel link repository
+# TG_TOKEN | Your telegram bot token
+# TG_CHAT_ID | Your telegram private ci chat id
+# BUILD_USER | Your username
+# BUILD_HOST | Your hostname
+
 echo "Downloading few Dependecies . . ."
+# Kernel Sources
 git clone --depth=1 https://github.com/arifmndr17/android_kernel_asus_X00R X00R
-git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
+git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 gcc-arm64 # EVA GCC set as GCC default
+git clone --depth=1 https://github.com/mvaisakh/gcc-arm gcc-arm # EVA GCC set as GCC Default
 
 # Main Declaration
-KERNEL_NAME=X00R-Test # IMPORTANT ! Declare your kernel name
 KERNEL_ROOTDIR=$(pwd)/X00R # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_CODENAME=X01AD # IMPORTANT ! Declare your device codename
 DEVICE_DEFCONFIG=X00R_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
-CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
+GCC64_ROOTDIR=$(pwd)/gcc-arm64 # IMPORTANT! Put your gcc64 directory here.
+GCC32_ROOTDIR=$(pwd)/gcc-arm # IMPORTANT! Put your gcc32 directory here.
 export KBUILD_BUILD_USER=Arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=DroidDev # Change with your own hostname.
-CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
-LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
-export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
+GCC_VER="$("$GCC64_ROOTDIR"/bin/aarch64-elf-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
+LLD_VER="$("$GCC64_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 IMAGE=$(pwd)/X00R/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
+PATH="${PATH}:${GCC64_ROOTDIR}/bin:${GCC32_ROOTDIR}/bin"
 
 # Checking environtment
 # Warning !! Dont Change anything there without known reason.
 function check() {
 echo ================================================
-echo xKernelCompiler CircleCI Edition
+echo KernelCompilerGcc
 echo version : rev1.5 - gaspoll
 echo ================================================
 echo BUILDER NAME = ${KBUILD_BUILD_USER}
 echo BUILDER HOSTNAME = ${KBUILD_BUILD_HOST}
 echo DEVICE_DEFCONFIG = ${DEVICE_DEFCONFIG}
-echo CLANG_VERSION = ${KBUILD_COMPILER_STRING}
-echo CLANG_ROOTDIR = ${CLANG_ROOTDIR}
+echo TOOLCHAIN_VERSION = ${GCC_VER}.${LLD_VER}
+echo GCC_ROOTDIR = ${GCC64_ROOTDIR}
 echo KERNEL_ROOTDIR = ${KERNEL_ROOTDIR}
 echo ================================================
 }
@@ -46,29 +63,25 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>Bot Kernel</b>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0AClang Version : <code>${KBUILD_COMPILER_STRING}</code>%0AClang Rootdir : <code>${CLANG_ROOTDIR}</code>%0AKernel Rootdir : <code>${KERNEL_ROOTDIR}</code>"
+tg_post_msg "<b>KernelCompiler</b>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code>%0ABuilder Host : <code>${KBUILD_BUILD_HOST}</code>%0ADevice Defconfig: <code>${DEVICE_DEFCONFIG}</code>%0AGCC Version : <code>${GCC_VER}</code>%0AGCC Rootdir : <code>${GCC64_ROOTDIR}</code>%0AKernel Rootdir : <code>${KERNEL_ROOTDIR}</code>"
 
 # Compile
 compile(){
-tg_post_msg "<b>Bot Kernel:</b><code>X00R Release Now..</code>"
+tg_post_msg "<b>xKernelCompiler:</b><code>Compilation has started</code>"
 cd ${KERNEL_ROOTDIR}
-make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
+make -j$(nproc) O=out ARCH=arm64 X00R_defconfig
 make -j$(nproc) ARCH=arm64 O=out \
-    CC=${CLANG_ROOTDIR}/bin/clang \
-    AR=${CLANG_ROOTDIR}/bin/llvm-ar \
-    NM=${CLANG_ROOTDIR}/bin/llvm-nm \
-    OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
-    OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
-    STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
-    CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
-    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
+    LD=${GCC64_ROOTDIR}/bin/ld.lld \
+    CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-elf- \
+    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-eabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
 	exit 1
    fi
-    git clone --depth=1 https://github.com/arifmndr17/AnyKernel3 AnyKernel
-	cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
+
+  git clone --depth=1 https://github.com/arifmndr17/AnyKernel3 AnyKernel
+	cp $IMAGE AnyKernel
 }
 
 # Push kernel to channel
@@ -79,7 +92,7 @@ function push() {
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>$DEVICE_CODENAME</b> | <b>${KBUILD_COMPILER_STRING}</b>"
+        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>$DEVICE_CODENAME</b> | <b>${GCC_VER}</b>"
 }
 # Fin Error
 function finerr() {
