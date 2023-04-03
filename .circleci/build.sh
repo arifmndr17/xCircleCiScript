@@ -4,10 +4,10 @@ git clone --depth=1 https://github.com/arifmndr17/kernel_rmx1971 RMX1971
 git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
 
 # Main Declaration
-KERNEL_NAME=Xirlect~Lightning Fast⚡ # IMPORTANT ! Declare your kernel name
+KERNEL_NAME=Xirlect⚡ # IMPORTANT ! Declare your kernel name
 KERNEL_ROOTDIR=$(pwd)/RMX1971 # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_CODENAME=RMX1971 # IMPORTANT ! Declare your device codename
-DEVICE_DEFCONFIG=KharaMe_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+DEVICE_DEFCONFIG=xirlect_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=Arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=DroidDev # Change with your own hostname.
