@@ -17,17 +17,17 @@
 
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
-git clone --depth=1 https://github.com/arifmndr17/android_kernel_xiaomi_ginkgo -b Fourteen ginkgo
+git clone --depth=1 https://github.com/arifmndr17/android_kernel_xiaomi_ginkgo ginkgo
 git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 gcc-arm64 # EVA GCC set as GCC default
 git clone --depth=1 https://github.com/mvaisakh/gcc-arm gcc-arm # EVA GCC set as GCC Default
 
 # Main Declaration
-KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_DEFCONFIG=$DEVICE_DEFCONFIG # IMPORTANT ! Declare your kernel source defconfig file here.
+KERNEL_ROOTDIR=$(pwd)/ginkgo # IMPORTANT ! Fill with your kernel source root directory.
+DEVICE_DEFCONFIG=/vendor/ginkgo-perf_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 GCC64_ROOTDIR=$(pwd)/gcc-arm64 # IMPORTANT! Put your gcc64 directory here.
 GCC32_ROOTDIR=$(pwd)/gcc-arm # IMPORTANT! Put your gcc32 directory here.
-export KBUILD_BUILD_USER=$BUILD_USER # Change with your own name or else.
-export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
+export KBUILD_BUILD_USER=Arif # Change with your own name or else.
+export KBUILD_BUILD_HOST=DroidCi # Change with your own hostname.
 GCC_VER="$("$GCC64_ROOTDIR"/bin/aarch64-elf-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$GCC64_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 IMAGE=$(pwd)/ginkgo/out/arch/arm64/boot/Image.gz-dtb
