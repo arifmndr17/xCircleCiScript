@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
 git clone --depth=1 https://github.com/arifmndr17/android_kernel_xiaomi_ginkgo ginkgo
-git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
+git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
 
 # Main Declaration
 KERNEL_NAME=Xirlect⚡ # IMPORTANT ! Declare your kernel name
@@ -50,7 +50,7 @@ tg_post_msg "<b>Bot Kernel</b>%0ABuilder Name : <code>${KBUILD_BUILD_USER}</code
 
 # Compile
 compile(){
-tg_post_msg "<b>Bot Kernel:</b><code>Test Kernel For Realme 5 Pro Release Now..</code>"
+tg_post_msg "<b>Bot Kernel:</b><code>Test Kernel For GINKGO Release Now!!!..</code>"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
