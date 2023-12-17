@@ -17,7 +17,7 @@
 
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE $KERNEL_BRANCH $DEVICE_CODENAME
+git clone --depth=1 https://github.com/arifmndr17/android_kernel_xiaomi_ginkgo -b Fourteen ginkgo
 git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 gcc-arm64 # EVA GCC set as GCC default
 git clone --depth=1 https://github.com/mvaisakh/gcc-arm gcc-arm # EVA GCC set as GCC Default
 
@@ -30,7 +30,7 @@ export KBUILD_BUILD_USER=$BUILD_USER # Change with your own name or else.
 export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
 GCC_VER="$("$GCC64_ROOTDIR"/bin/aarch64-elf-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$GCC64_ROOTDIR"/bin/ld.lld --version | head -n 1)"
-IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
+IMAGE=$(pwd)/ginkgo/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 PATH="${PATH}:${GCC64_ROOTDIR}/bin:${GCC32_ROOTDIR}/bin"
