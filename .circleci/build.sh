@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 echo "Downloading few Dependecies . . ."
-git clone --depth=1 https://github.com/arifmndr17/kernel_rmx1971 RMX1971
+git clone --depth=1 https://github.com/arifmndr17/android_kernel_xiaomi_ginkgo ginkgo
 git clone --depth=1 https://github.com/arifmndr17/hyper-clang clang
 
 # Main Declaration
 KERNEL_NAME=Xirlect⚡ # IMPORTANT ! Declare your kernel name
-KERNEL_ROOTDIR=$(pwd)/RMX1971 # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_CODENAME=RMX1971 # IMPORTANT ! Declare your device codename
-DEVICE_DEFCONFIG=xirlect_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+KERNEL_ROOTDIR=$(pwd)/ginkgo # IMPORTANT ! Fill with your kernel source root directory.
+DEVICE_CODENAME=ginkgo # IMPORTANT ! Declare your device codename
+DEVICE_DEFCONFIG=ginkgo-perf_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/clang # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=Arif # Change with your own name or else.
 export KBUILD_BUILD_HOST=DroidDev # Change with your own hostname.
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
-IMAGE=$(pwd)/RMX1971/out/arch/arm64/boot/Image.gz-dtb
+IMAGE=$(pwd)/ginkgo/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 
